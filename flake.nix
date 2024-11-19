@@ -7,11 +7,16 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, disko, ... }:
+  outputs = { self, nixpkgs, disko, ... }@inputs:
+    let
+      mkSystem = system: nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+      };
+    in
     {
       nixosConfigurations = {
-        latte = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
+        latte = mkSystem "aarch64-linux" {
           modules = [
             ./machines/latte/configuration.nix
             ./modules/desktop.nix
@@ -21,8 +26,7 @@
           ];
         };
 
-        fragile = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        fragile = mkSystem "x86_64-linux" {
           modules = [
             ./machines/fragile/configuration.nix
             ./shared
