@@ -9,14 +9,15 @@
 
   outputs = { self, nixpkgs, disko, ... }@inputs:
     let
-      mkSystem = system: nixpkgs.lib.nixosSystem {
-        inherit system;
+      mkSystem = { system, modules }: nixpkgs.lib.nixosSystem {
+        inherit system modules;
         specialArgs = { inherit inputs; };
       };
     in
     {
       nixosConfigurations = {
-        latte = mkSystem "aarch64-linux" {
+        latte = mkSystem {
+          system = "aarch64-linux";
           modules = [
             ./machines/latte/configuration.nix
             ./modules/desktop.nix
@@ -26,7 +27,8 @@
           ];
         };
 
-        fragile = mkSystem "x86_64-linux" {
+        fragile = mkSystem {
+          system = "x86_64-linux";
           modules = [
             ./machines/fragile/configuration.nix
             ./shared
