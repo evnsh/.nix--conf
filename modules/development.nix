@@ -9,8 +9,9 @@
     python3
     clang
     kubectl
-    cursor-arm.packages.aarch64-linux.default
     zed-editor
     asahi-bless
   ];
+
+  virtualisation.docker.enable = true;
 }
