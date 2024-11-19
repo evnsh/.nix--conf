@@ -14,7 +14,7 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/8af4e8a7-d847-4faa-a1eb-580468d72e05";
+    { device = lib.mkForce "/dev/mapper/cryptroot";
       fsType = "ext4";
     };
 
