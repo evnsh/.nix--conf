@@ -5,7 +5,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/disk/by-uuid/258c05cf-489e-42ca-95cd-f2ed6ebfe353";
+        device = "/dev/disk/by-id/ata-SPCC_Solid_State_Disk_AA22090256027790";
         content = {
           type = "gpt";
           partitions = {
@@ -16,7 +16,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "fmask=0022" "dmask=0022" ];
+                mountOptions = [ "fmask=0137" "dmask=0027" ];
               };
             };
             luks = {

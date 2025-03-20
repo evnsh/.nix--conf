@@ -6,7 +6,9 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
     shell = pkgs.zsh;
-    # We don't set a password here, as we're using SSH key authentication only
+    openssh.authorizedKeys.keys = [
+      "ecdsa-sha2-nistp521 AAAAE2VjZHNhLXNoYTItbmlzdHA1MjEAAAAIbmlzdHA1MjEAAACFBACAZNMlh6YKmbFiTV3diL3p+1HpndHkRch98nJuGO8b2dx5WvdUg2bO2sKA+f6kT8fqpMFVjMYqANyTjtkFLVYocACCF+scZfnWr0lpGwN6P+mu6NIXcvtOy02nJE7G6TOgvwrbhs/KwwLU2TbJonQ9WnOwgEwWmvBdOQzFihXUpyeVBg== me@evan.sh"
+    ];
   };
 
   # Disable root login

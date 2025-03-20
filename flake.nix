@@ -3,15 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, ... }@inputs:
+  outputs = { self, nixpkgs, disko, ... }:
     let
       mkSystem = { system, modules }: nixpkgs.lib.nixosSystem {
         inherit system modules;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit self nixpkgs disko; };
       };
     in
     {
@@ -23,16 +25,15 @@
             ./modules/desktop.nix
             ./modules/development.nix
             ./modules/asahi.nix
-            ./shared
           ];
         };
 
         fragile = mkSystem {
           system = "x86_64-linux";
           modules = [
-            ./machines/fragile/configuration.nix
-            ./shared
             disko.nixosModules.disko
+            ./machines/fragile/configuration.nix
+            ./modules/nas.nix
           ];
         };
       };
