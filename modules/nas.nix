@@ -17,7 +17,14 @@
       shared = { path = "/data/shared"; users = [ "brandon" "evan" ]; readOnly = false; };
       evan = { path = "/data/evan"; users = [ "evan" ]; readOnly = false; };
       brandon = { path = "/data/brandon"; users = [ "brandon" ]; readOnly = false; };
-      timemachine = { path = "/data/timemachine"; users = [ "brandon" "evan" ]; readOnly = false; };
+      timemachine = {
+        path = "/data/timemachine";
+        users = [ "evan" "brandon" ];
+        readOnly = false;
+        "fruit:aapl" = "yes";
+        "fruit:time machine" = "yes";
+        "vfs objects" = "catia fruit streams_xattr";
+      };
     };
   };
 

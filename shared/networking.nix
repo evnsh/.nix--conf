@@ -5,7 +5,8 @@
     # Firewall configuration
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 22 80 443 ]; # Allow SSH and web ports
+      allowedTCPPorts = [ 22 80 443 139 445 ]; # Allow SSH, web ports, and Samba
+      allowedUDPPorts = [ 137 138 ]; # Allow Samba UDP ports
       allowPing = true;
     };
 
