@@ -62,9 +62,15 @@
     dataDir = [ "/block-data" ];
   };
 
-  # System packages for Plex and MinIO
+  # Tailscale configuration
+  services.tailscale = {
+    enable = true;
+  };
+
+  # System packages for Plex, MinIO, and Tailscale
   environment.systemPackages = with pkgs; [
     pkgs.plex
     pkgs.minio
+    pkgs.tailscale
   ];
 }
