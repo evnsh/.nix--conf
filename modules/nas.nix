@@ -13,22 +13,50 @@
   # Samba configuration for sharing
   services.samba = {
     enable = true;
-    shares = {
-      shared = { path = "/data/shared"; users = [ "brandon" "evan" ]; readOnly = false; };
-      evan = { path = "/data/evan"; users = [ "evan" ]; readOnly = false; };
-      brandon = { path = "/data/brandon"; users = [ "brandon" ]; readOnly = false; };
-      timemachine = {
-        path = "/data/timemachine";
-        users = [ "evan" "brandon" ];
-        readOnly = false;
+    openFirewall = true;
+    settings = {
+      global = {
+        "security" = "user";
+        "wide links" = "yes";
+        "unix extensions" = "no";
+        "vfs object" = "acl_xattr catia fruit streams_xattr";
+        "fruit:nfc_aces" = "no";
         "fruit:aapl" = "yes";
-        "fruit:time machine" = "yes";
+        "fruit:model" = "MacSamba";
+        "fruit:posix_rename" = "yes";
+        "fruit:metadata" = "stream";
+        "fruit:delete_empty_adfiles" = "yes";
+        "fruit:veto_appledouble" = "no";
+        "spotlight" = "yes";
+      };
+      "shared" = {
+        path = "/data/shared";
+        users = [ "brandon" "evan" ];
+        readOnly = false;
+      };
+      "evan" = {
+        path = "/data/evan";
+        users = [ "evan" ];
+        readOnly = false;
+      };
+      "brandon" = {
+        path = "/data/brandon";
+        users = [ "brandon" ];
+        readOnly = false;
+      };
+      "timemachine" = {
+        "path" = "/data/timemachine";
+        "available" = "yes";
+        "writable" = "yes";
+        "guest ok" = "no";
+        "valid users" = "(evan)";
         "vfs objects" = "catia fruit streams_xattr";
+        "fruit:time machine" = "yes";
+        "fruit:time machine max size" = "500G";
       };
     };
   };
 
-  # Ensure the directories exist
   systemd.services.createDirectories = {
     description = "Create NAS user directories";
     wantedBy = [ "multi-user.target" ];
@@ -49,25 +77,21 @@
     '';
   };
 
-  # Plex Media Server configuration
   services.plex = {
     enable = true;
     openFirewall = true;
   };
 
-  # MinIO configuration for block storage
   services.minio = {
     enable = true;
     region = "eu-west-3";
     dataDir = [ "/block-data" ];
   };
 
-  # Tailscale configuration
   services.tailscale = {
     enable = true;
   };
 
-  # System packages for Plex, MinIO, and Tailscale
   environment.systemPackages = with pkgs; [
     pkgs.plex
     pkgs.minio
