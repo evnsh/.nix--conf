@@ -16,43 +16,38 @@
     openFirewall = true;
     settings = {
       global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "Samba NAS";
+        "netbios name" = "nas";
         "security" = "user";
-        "wide links" = "yes";
-        "unix extensions" = "no";
-        "vfs object" = "acl_xattr catia fruit streams_xattr";
-        "fruit:nfc_aces" = "no";
-        "fruit:aapl" = "yes";
-        "fruit:model" = "MacSamba";
-        "fruit:posix_rename" = "yes";
-        "fruit:metadata" = "stream";
-        "fruit:delete_empty_adfiles" = "yes";
-        "fruit:veto_appledouble" = "no";
-        "spotlight" = "yes";
-      };
-      "shared" = {
-        path = "/data/shared";
-        users = [ "brandon" "evan" ];
-        readOnly = false;
-      };
-      "evan" = {
-        path = "/data/evan";
-        users = [ "evan" ];
-        readOnly = false;
-      };
-      "brandon" = {
-        path = "/data/brandon";
-        users = [ "brandon" ];
-        readOnly = false;
-      };
-      "timemachine" = {
-        "path" = "/data/timemachine";
-        "available" = "yes";
+        "invalid users" = [ "root" ];
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+        "browseable" = "yes";
         "writable" = "yes";
+        "read only" = "no";
         "guest ok" = "no";
-        "valid users" = "(evan)";
-        "vfs objects" = "catia fruit streams_xattr";
-        "fruit:time machine" = "yes";
-        "fruit:time machine max size" = "500G";
+      };
+      shares = {
+        "shared" = {
+          path = "/data/shared";
+          users = [ "brandon" "evan" ];
+          readOnly = false;
+        };
+        "evan" = {
+          path = "/data/evan";
+          users = [ "evan" ];
+          readOnly = false;
+        };
+        "brandon" = {
+          path = "/data/brandon";
+          users = [ "brandon" ];
+          readOnly = false;
+        };
+        "timemachine" = {
+          path = "/data/timemachine";
+          "fruit:time machine" = "yes";
+        };
       };
     };
   };
