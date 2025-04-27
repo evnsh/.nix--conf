@@ -28,26 +28,24 @@
         "read only" = "no";
         "guest ok" = "no";
       };
-      shares = {
-        "shared" = {
-          path = "/data/shared";
-          users = [ "brandon" "evan" ];
-          readOnly = false;
-        };
-        "evan" = {
-          path = "/data/evan";
-          users = [ "evan" ];
-          readOnly = false;
-        };
-        "brandon" = {
-          path = "/data/brandon";
-          users = [ "brandon" ];
-          readOnly = false;
-        };
-        "timemachine" = {
-          path = "/data/timemachine";
-          "fruit:time machine" = "yes";
-        };
+      "shared" = {
+        path = "/data/shared";
+        users = [ "brandon" "evan" ];
+        readOnly = false;
+      };
+      "evan" = {
+        path = "/data/evan";
+        users = [ "evan" ];
+        readOnly = false;
+      };
+      "brandon" = {
+        path = "/data/brandon";
+        users = [ "brandon" ];
+        readOnly = false;
+      };
+      "timemachine" = {
+        path = "/data/timemachine";
+        "fruit:time machine" = "yes";
       };
     };
   };
